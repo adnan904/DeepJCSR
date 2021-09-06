@@ -1,0 +1,9 @@
+res/traces/flows/abilene/50/50-0.1-20-50.0-Z-Z-100.txt
+res/traces/flows/abilene/50/50-0.2-20-50.0-Z-Z-100.txt
+res/traces/flows/abilene/50/50-0.3-20-50.0-Z-Z-100.txt
+res/traces/flows/abilene/50/50-0.4-20-50.0-Z-Z-100.txt
+res/traces/flows/abilene/50/50-0.5-20-50.0-Z-Z-100.txt
+res/traces/flows/abilene/50/50-0.6-20-50.0-Z-Z-100.txt
+res/traces/flows/abilene/50/50-0.7-20-50.0-Z-Z-100.txt
+res/traces/flows/abilene/50/50-0.8-20-50.0-Z-Z-100.txt
+res/traces/flows/abilene/50/50-0.9-20-50.0-Z-Z-100.txt

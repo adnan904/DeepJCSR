@@ -1,0 +1,9 @@
+*.pyc
+*.sublime*
+venv/
+.idea/
+.ipynb*
+results/
+
+# Mac OS X
+.DS_Store

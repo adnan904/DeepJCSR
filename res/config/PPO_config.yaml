@@ -1,0 +1,28 @@
+
+# Policy and Value function NN sizes
+vf_nn: [64]
+pi_nn: [64]
+
+
+learning_rate: 0.0003
+
+batch_size: 64
+
+# Discount factor
+gamma: 0.99
+
+# Factor for trade-off of bias vs variance for Generalized Advantage Estimator
+gae_lambda: 0.95
+
+# Entropy coefficient for the loss calculation
+ent_coef: 0.0
+
+# Value function coefficient for the loss calculation
+vf_coef: 0.5
+
+# The maximum value for the gradient clipping
+max_grad_norm: 0.5
+
+# (int) the verbosity level:
+# 0 none, 1 training information, 2 tensorflow debug
+verbose: 0
