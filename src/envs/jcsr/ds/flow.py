@@ -34,6 +34,9 @@ class Flow():
             self.fct))
 
     def __eq__(self, other):
+        """
+        Overloading the equality operator
+        """
         assert isinstance(other, Flow)
         return self.id == other.id
 

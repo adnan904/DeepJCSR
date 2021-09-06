@@ -7,6 +7,9 @@ from src.utils.utils import get_avg_cct
 
 
 def random_baseline(trace_file, paths, paths_map, results_dir):
+    """
+    Baseline Algo. that randomly selects the overall placement and routes for each flow in the trace file
+    """
     basename = os.path.basename(trace_file.trace_file).split('.txt')[0]
     metrics_filename = f"{results_dir}/metrics/{basename}.csv"
     os.makedirs(os.path.dirname(metrics_filename), exist_ok=True)
@@ -33,6 +36,9 @@ def random_baseline(trace_file, paths, paths_map, results_dir):
 
 
 def fcfs_baseline(trace_file, paths, paths_map, results_dir):
+    """
+    The Baseline algo that schedules the flows based on the arrival times. Its selects the route based on equal cost
+    """
     basename = os.path.basename(trace_file.trace_file).split('.txt')[0]
     metrics_filename = f"{results_dir}/metrics/{basename}.csv"
     os.makedirs(os.path.dirname(metrics_filename), exist_ok=True)

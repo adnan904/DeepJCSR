@@ -1,5 +1,15 @@
 
 class Simulator:
+    """
+    Simulator Class for the simulation of the actions of the RL/baseline Algos.
+    - When a non-processed flow is selected as the next action, current_time changes to the arrival time of that flow.
+    - If the selected flow as the next action has arrival time before the current time, then its simply processed.
+    - If the selected action has already been processed, it is considered to be a repeated action and no reward is
+    awarded for this action
+    - The reward otherwise is (expected completion time of the flow / actual completion time)
+    - expected completion time depends on the link datarate, flow size, and the total delay of the shortest path (ideal)
+    - actual completion time depends on when the flow was scheduled and if the path chosen is available or not
+    """
     def __init__(self, trace_file, link_objects, links_map,  debug=False):
         self.trace_file = trace_file
         self.link_objects = link_objects
@@ -13,17 +23,21 @@ class Simulator:
         self.done = False
 
     def process_finished_flows(self):
-            if self.active_flows:
-                for flow in self.active_flows:
-                    if self.current_time > flow.actual_finish_time:
-                        flow.link.num_active_flows -= 1
-                        flow.link.total_time_busy_for -= (flow.duration + flow.link.delay)
-                        if flow.link.num_active_flows <= 0:
-                            flow.link.reset()
-                        flow.link = None
-                        flow.is_active = False
-                        flow.is_finished = True
-                        self.active_flows.remove(flow)
+        """
+        Once the current time of the simulator is more than the finishing time of the active flow is it set to be
+        finished and the path it was occupying is released.
+        """
+        if self.active_flows:
+            for flow in self.active_flows:
+                if self.current_time > flow.actual_finish_time:
+                    flow.link.num_active_flows -= 1
+                    flow.link.total_time_busy_for -= (flow.duration + flow.link.delay)
+                    if flow.link.num_active_flows <= 0:
+                        flow.link.reset()
+                    flow.link = None
+                    flow.is_active = False
+                    flow.is_finished = True
+                    self.active_flows.remove(flow)
 
     def step(self, action):
         """
@@ -35,6 +49,7 @@ class Simulator:
         """
         self.process_finished_flows()
 
+        # if the chosen flow has already been processed, return with reward 0
         repeated_action = False
         if action[0] in self.processed_flow_ids:
             reward = 0
@@ -84,7 +99,7 @@ class Simulator:
 
     def reset(self):
         """
-        Reset
+        Reset the simulator object
         """
 
         self.current_time = 0

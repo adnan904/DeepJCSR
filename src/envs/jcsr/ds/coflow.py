@@ -3,7 +3,7 @@ import numpy as np
 
 
 class Coflow:
-    """Simple container class for flows"""
+    """Simple container class for Co-flows"""
 
     def __init__(self, id, arrival_time, size, flows=[], duration=np.inf):
         self.id = id

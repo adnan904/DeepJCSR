@@ -14,7 +14,7 @@ parser.add_argument("--algo", dest="algo", type=int, default=0,
 # Training algorithm
 parser.add_argument("-ac", "--agent-config", dest="agent_config_file", type=str, default=Constants.DEFAULT_AGENT_CONFIG,
                     help="Specifiy the location for the RL agent config file in yaml format")
-parser.add_argument("--eps", type=int, default=10, help="Number of episodes")
+parser.add_argument("--eps", type=int, default=100, help="Number of episodes")
 parser.add_argument("--tts", type=int, default=1e10, help="Total timesteps before terminating the training of agent")
 parser.add_argument("--num_ros", type=int, default=2, help="Number of rollouts")
 

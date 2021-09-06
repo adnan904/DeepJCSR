@@ -1,4 +1,3 @@
-import sys
 import os
 import pandas as pd
 from src.envs.jcsr.ds.coflow import Coflow

@@ -31,6 +31,10 @@ def read_agent_config_file(file_path):
 
 
 def read_traces(train_traces_config, test_traces_config):
+    """
+    Read all the train and test trace files provided and create a separate Trace class object for each one
+    returns: lists of train and test Trace class objects, one for each train and test trace file provided
+    """
     train_traces = []
     test_traces = []
     with open(train_traces_config, 'r+') as f1:
@@ -125,8 +129,7 @@ class StopTrainingOnMaxEpisodes(EventCallback):
     :param verbose: Select whether to print information about when training ended by reaching ``max_episodes``
     """
 
-    def __init__(self, max_episodes: int, callback_on_new_best: Optional[BaseCallback] = None, \
-        verbose: int = 0):
+    def __init__(self, max_episodes: int, callback_on_new_best: Optional[BaseCallback] = None, verbose: int = 0):
         super(StopTrainingOnMaxEpisodes, self).__init__(callback_on_new_best, verbose=verbose)
         self.max_episodes = max_episodes
         self._total_max_episodes = max_episodes

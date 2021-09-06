@@ -91,6 +91,7 @@ def read_network(file):
     for edge in networkx_network.edges.values():
         edge['weight'] = weight(edge['cap'], edge['delay'])
 
+    # Finding the 3 shortest paths(based on delay) between all pairs of nodes in the network
     link_id = 0
     for s in range(len(networkx_network.nodes)):
         for d in range(len(networkx_network.nodes)):

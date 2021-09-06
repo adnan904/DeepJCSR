@@ -18,6 +18,9 @@ from stable_baselines3.common.monitor import Monitor
 
 
 def make_env(name, trace_file, results_folder, link_objects, links_map):
+    """
+    Function to create the gym environment. Also creates a writer for writing the result file
+    """
     # Create the metrics directory if it does not exist
     basename = os.path.basename(trace_file.trace_file).split('.txt')[0]
     metrics_filename = f"{results_folder}/metrics/{basename}.csv"
@@ -54,12 +57,19 @@ def create_or_load_agent(env, agent_config, results_folder, load_agent=False, mo
 
 
 def main():
+    # Setting the results directory based on the seed
     args.results_folder = "{}-{}".format(args.results_folder, args.seed)
+    # Reading the network file and creating the paths/links between all pairs of nodes in the network
     networkx, link_objects, links_map = read_network(args.net_topo_file)
+    # creating a trace object per input train and test files
     train_traces, test_traces = read_traces(args.train_traces, args.test_traces)
+    # hyper-parameters for the agent provided in the agent config file
     agent_config = read_agent_config_file(args.agent_config_file)
+    # All the provided train and test traces should have the same number of flows in them
+    # This is required for the observation space, as it has to be constant throughout the run
     Constants.NUM_FLOWS_PER_TRACE = train_traces[0].num_flows
 
+    # Setting the results directories
     train_results_dir_path = "{}/train/".format(args.results_folder)
     test_results_dir_path = "{}/test/".format(args.results_folder)
     random_baseline_dir_path = "{}/baselines/random".format(args.results_folder)
@@ -104,7 +114,7 @@ def main():
                 # update progress bar
                 pb_callback.update_nc_eps(i * args.eps)
 
-                # total_timesteps is set large to let the agent terminate training on completing epsiodes
+                # total_timesteps is set large to let the agent terminate training on completing episodes
                 agent.learn(total_timesteps=args.tts, callback=[max_eps_callback, mean_ep_reward_callback])
 
                 # close the metrics stream

@@ -1,5 +1,4 @@
 
-
 class Constants:
     RACK_BITS_PER_SEC = 1.0 * 1024 * 1024 * 1024        # 1Gbps
     RACK_BYTES_PER_SEC = RACK_BITS_PER_SEC / 8.0        # Bps
