@@ -106,7 +106,9 @@ def read_network(file):
                 paths = nx.all_simple_paths(networkx_network, source=s, target=d)
                 paths = [list(p) for p in map(nx.utils.pairwise, paths)]
                 assert len(paths) > 0, f'No path between nodes: {s} and {d}. Graph should be connected'
-                assert len(paths) > 2, f'Less than 3 paths between source and destination'
+                if not len(paths) > 2:
+                    paths.append(paths[0])
+                    paths.append(paths[0])
                 delays = []
                 paths_delay_dict = defaultdict(list)
                 for path in paths:
